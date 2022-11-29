@@ -1,1 +1,89 @@
-Another Test Edit
+int menu()
+
+
+
+
+struct Car
+
+
+
+struct Profile
+{
+    name
+    state
+    preference
+
+    createProfile()
+    {
+        User inputs name, state, preference based on prompts
+    }
+
+    viewProfile()
+    {
+        *******************************
+        Name: self.name
+        State: self.state
+        Preference: self.preference
+    }
+
+    updateProfile()
+    {
+        *******************************
+        Update Name.............press 0
+        Update State............press 1
+        Update Preference.......press 2
+
+        if choice == 0
+            update name
+        if choice == 1
+            update state
+        if choice == 2
+            update preference
+    }
+}
+
+
+
+main
+{
+    while program_is_running and iterations < 10,000 or something:
+        switch(menu())
+        {
+            case 0: Create Profile
+                    user = Profile
+            case 1: View Profile
+                    user.viewProfile()
+            case 2: Update Profile
+                    user.updateProfile()
+            case 3: Search Inventory
+            case 4: Update Inventory
+            case 5: Print Inventory
+            case 6: Car Loan
+            case 7: Exit
+            Defualt: 
+        }
+}
+
+
+int menu()
+{
+    *******************************
+             CSC INVENTORY
+    *******************************
+    Create Profile..........press 0
+    View Profile............press 1
+    Update Profile..........press 2
+    Search Inventory........press 3
+    Update Inventory........press 4
+    Print Inventory.........press 5
+    Car Loan................press 6
+    Exit....................press 7
+
+    cin >> choice
+
+    if choice is not between 0-7, set choice to 8.
+    This will trigger the default in the outside switch statement.
+    And (hopefully) stop infinite loops from string inputs that I got in the last program.
+
+    return choice
+}
