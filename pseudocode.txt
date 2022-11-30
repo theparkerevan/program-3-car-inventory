@@ -82,8 +82,9 @@ int menu()
     cin >> choice
 
     if choice is not between 0-7, set choice to 8.
-    This will trigger the default in the outside switch statement.
-    And (hopefully) stop infinite loops from string inputs that I got in the last program.
+
+    Previous idea did not work.
+    But I did look it up and found a method that works by clearing the cin input and ignoring the rest.
 
     return choice
 }
