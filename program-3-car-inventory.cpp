@@ -6,6 +6,7 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -15,6 +16,22 @@ using namespace std;
    Pre-Conditions: None
    Post-Conditions: An integer between 0-8 is returned. 8 Being a default value for out of range choices.*/
 int menu();
+
+
+struct Car
+{
+    string model;
+    string state;
+    int price;
+    int quantity;
+    float mpg;
+    char rating;
+
+    void printSelf()
+    {
+        cout << model << " " << state << " " << price << " " << quantity << " " << mpg << " " << rating << endl;
+    }
+};
 
 
 struct Profile
@@ -88,8 +105,38 @@ struct Profile
 
 int main()
 {
-    bool program_is_running = true;
     Profile user;
+    Car inventory[20]; // Array for car inventory, all cars are stored in this. Inventory file has 20 lines, user cannot add new cars in program.
+
+    // Open inventory file
+    ifstream inven_raw("Inventory.txt");
+
+    // Temp variables for Car creation purposes.
+    string raw_model;
+    string raw_state;
+    int raw_price;
+    int raw_quantity;
+    float raw_mpg;
+    char raw_rating;
+
+    int i = 0; // inventory[] index
+
+    // For each line in Inventory.txt, assign each element to temp variable.
+    while (inven_raw >> raw_model >> raw_state >> raw_price >> raw_quantity >> raw_mpg >> raw_rating)
+    {
+        // Assign each temp variable to corresponding variable inside Car struct
+        inventory[i].model = raw_model;
+        inventory[i].state = raw_state;
+        inventory[i].price = raw_price;
+        inventory[i].quantity = raw_quantity;
+        inventory[i].mpg = raw_mpg;
+        inventory[i].rating = raw_rating;
+        
+        // Finally incremement the index
+        i++;
+    }
+
+    bool program_is_running = true;
     // The Main Program Loop runs as long as the variable program_is_running is true.
     // It stays true until the user inputs '7'.
     while (program_is_running)

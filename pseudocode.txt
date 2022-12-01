@@ -4,6 +4,19 @@ int menu()
 
 
 struct Car
+{
+    name
+    state
+    price
+    quantity
+    mpg
+    rating
+
+    void printSelf()
+    {
+        print self for viewing and testing purpose.
+    }
+}
 
 
 
@@ -46,6 +59,26 @@ struct Profile
 
 main
 {
+    ifstream inven_raw("inventory.txt");
+    
+    string raw_name;
+    string raw_state;
+    int raw_price;
+    int raw_quantity;
+    int raw_mpg;
+    char raw_rating;
+
+    Car inventory[];
+
+    This while loop runs once for each line in the inventory file.
+    while(inven_raw >> all raw variables in order)
+    {
+        Create Car instance inside of inventory[i]
+        Then assign each raw variable to inventory[i].variable;
+        i++
+    }
+
+
     while program_is_running and iterations < 10,000 or something:
         switch(menu())
         {
