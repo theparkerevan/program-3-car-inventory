@@ -1,0 +1,23 @@
+Lexus Virginia 45984 12 21.9 A
+Mercedes California 51276 23 19.7 A
+BMW Florida 47628 34 20.0 A
+Audi Texas 27548 20 26.8 B
+Toyota Washington 26903 56 25.8 B
+Subaru Virginia 21445 98 30 B
+Nissan California 19734 84 22.4 C
+Ford Florida 29864 67 25.9 C
+Chevy Texas 17409 103 22.1 D
+Honda Washington 16293 289 22.8 D
+Lexus Florida 45984 12 21.9 A
+Mercedes Virginia 51276 23 19.7 A
+BMW Texas 47628 34 20.0 A
+Audi Washington 27548 20 26.8 B
+Toyota Virginia 26903 56 25.8 B
+Subaru Texas 21445 98 30 B
+Nissan Florida 19734 84 22.4 C
+Ford Washington 29864 67 25.9 C
+Chevy Virginia 17409 103 22.1 D
+Honda Texas 16293 289 22.8 D
+
+
+
