@@ -1,8 +1,9 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Programmer: Parker Davis
 // For CSC 201
-//
-//
+// 2 December 2022
+// program-3-car-inventory.cpp
+// A User can create and edit a profile, search, update, and print out a database of cars, and access a car loan calculator.
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #include <iostream>
@@ -490,11 +491,11 @@ void carLoan()
     monthly_payment = (loan_amount * (interest_rate / 12)) / (1 - pow((1 + interest_rate / 12), -loan_duration));
     interest = loan_amount * interest_rate / 12;
 
-    for (int i = 1; i <= loan_duration; i++)
+    for (int i = 1; i <= loan_duration; i++) // For each month the loan is payed off...
     {
-        loan_amount = loan_amount - monthly_payment + interest;
-        interest = loan_amount * interest_rate / 12;
+        loan_amount = loan_amount - monthly_payment + interest; // Calculate the loan that is still left to pay...
+        interest = loan_amount * interest_rate / 12; // And next month's interest
 
-        cout << i << setw(17) << abs(loan_amount) << setw(13) << monthly_payment << setw(11) << abs(interest) << endl;
+        cout << i << setw(17) << abs(loan_amount) << setw(13) << monthly_payment << setw(11) << abs(interest) << endl; // And Display the month's loan information.
     }
 }
