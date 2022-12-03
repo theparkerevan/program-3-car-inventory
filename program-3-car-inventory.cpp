@@ -11,16 +11,10 @@
 using namespace std;
 
 
-/* menu()
-   Int-Returning function
-   Pre-Conditions: None
-   Post-Conditions: An integer between 0-8 is returned. 8 Being a default value for out of range choices.*/
-int menu();
-
 
 struct Car
 {
-    string model;
+    string name;
     string state;
     int price;
     int quantity;
@@ -29,9 +23,16 @@ struct Car
 
     void printSelf()
     {
-        cout << model << " " << state << " " << price << " " << quantity << " " << mpg << " " << rating << endl;
+        cout << "Name: " << name << endl;
+        cout << "State: " << state << endl;
+        cout << "Price: " << price << endl;
+        cout << "Quantity: " << quantity << endl;
+        cout << "MPG: " << mpg << endl;
+        cout << "Rating: " << rating << endl;
+        cout << endl;
     }
 };
+
 
 
 struct Profile
@@ -103,6 +104,20 @@ struct Profile
 };
 
 
+/* menu()
+   Int-Returning function
+   Pre-Conditions: None
+   Post-Conditions: An integer between 0-8 is returned. 8 Being a default value for out of range choices.*/
+int menu();
+
+
+/* menu()
+   Void Function
+   Pre-Conditions: inventory array is passed
+   Post-Conditions: Correct car information is shown depending on user's choice.*/
+void searchInventory(Car[20], string);
+
+
 int main()
 {
     Profile user;
@@ -112,7 +127,7 @@ int main()
     ifstream inven_raw("Inventory.txt");
 
     // Temp variables for Car creation purposes.
-    string raw_model;
+    string raw_name;
     string raw_state;
     int raw_price;
     int raw_quantity;
@@ -122,10 +137,10 @@ int main()
     int i = 0; // inventory[] index
 
     // For each line in Inventory.txt, assign each element to temp variable.
-    while (inven_raw >> raw_model >> raw_state >> raw_price >> raw_quantity >> raw_mpg >> raw_rating)
+    while (inven_raw >> raw_name >> raw_state >> raw_price >> raw_quantity >> raw_mpg >> raw_rating)
     {
         // Assign each temp variable to corresponding variable inside Car struct
-        inventory[i].model = raw_model;
+        inventory[i].name = raw_name;
         inventory[i].state = raw_state;
         inventory[i].price = raw_price;
         inventory[i].quantity = raw_quantity;
@@ -180,7 +195,7 @@ int main()
                 break;
             
             case 3: // Search Inventory
-                cout << 3 << endl;
+                searchInventory(inventory, user.preference);
                 break;
             case 4: // Update Inventory
                 cout << 4 << endl;
@@ -235,4 +250,121 @@ int menu()
     }
 
     return choice;
+}
+
+
+void searchInventory(Car inventory[20], string user_preference)
+{
+    string choice; // Using a string variable here to avoid bad inputs
+    string search_term;
+    int search_value;
+    char search_rate;
+
+    int amount_found = 0; // Increments when matching item is found.
+    // If none are found, tell user no matches were found for their search term.
+
+    cout << "*******************************" << endl;
+    cout << "Search by name.........press 1" << endl;
+    cout << "Search by state.........press 2" << endl;
+    cout << "Search by quanity.......press 3" << endl;
+    cout << "Search by preference....press 4" << endl;
+    cout << "Search by rating........press 5" << endl;
+    cout << "Search by price.........press 6" << endl;
+    cout << "Return to main menu.....press 7" << endl;
+
+    cin >> choice;
+    cout << "*******************************" << endl;
+
+    if (choice == "1") // Names
+    {
+        cout << "Enter name to search for: ";
+        cin >> search_term;
+
+        for (int i = 0; i < 20; i++) // 20 iterations, for the inventory array.
+        {
+            if (inventory[i].name == search_term) // If matching item is found...
+            {
+                inventory[i].printSelf(); // Print the information of the matching car...
+                amount_found++; // And increment found counter.
+            }
+        }
+    }
+    else if (choice == "2") // States
+    {
+        cout << "Enter state to search for: ";
+        cin >> search_term;
+
+        for (int i = 0; i < 20; i++) // 20 iterations, for the inventory array.
+        {
+            if (inventory[i].state == search_term) // If matching item is found...
+            {
+                inventory[i].printSelf(); // Print the information of the matching car...
+                amount_found++; // And increment found counter.
+            }
+        }
+    }
+    else if (choice == "3") // Quantities
+    {
+        cout << "Enter quantity to search for: ";
+        cin >> search_value;
+
+        for (int i = 0; i < 20; i++) // 20 iterations, for the inventory array.
+        {
+            if (inventory[i].quantity <= search_value) // If matching item is found...
+            {
+                inventory[i].printSelf(); // Print the information of the matching car...
+                amount_found++; // And increment found counter.
+            }
+        }
+    }
+    else if (choice == "4") // Preference
+    {
+        // No need to search to check user preference
+        for (int i = 0; i < 20; i++) // 20 iterations, for the inventory array.
+        {
+            if (inventory[i].name == user_preference) // If matching item is found...
+            {
+                inventory[i].printSelf(); // Print the information of the matching car...
+                amount_found++; // And increment found counter.
+            }
+        }
+    }
+    else if (choice == "5") // Ratings
+    {
+        cout << "Enter rating to search for: ";
+        cin >> search_rate;
+
+        for (int i = 0; i < 20; i++) // 20 iterations, for the inventory array.
+        {
+            if (inventory[i].rating == search_rate) // If matching item is found...
+            {
+                inventory[i].printSelf(); // Print the information of the matching car...
+                amount_found++; // And increment found counter.
+            }
+        }
+    }
+    else if (choice == "6") // Price
+    {
+        cout << "Enter value to search for: ";
+        cin >> search_value;
+
+        for (int i = 0; i < 20; i++) // 20 iterations, for the inventory array.
+        {
+            if (inventory[i].price <= search_value) // If matching item is found...
+            {
+                inventory[i].printSelf(); // Print the information of the matching car...
+                amount_found++; // And increment found counter.
+            }
+        }
+    }
+    else if(choice != "7")
+    {
+        cout << "Invalid choice, returning to main menu." << endl;
+    }
+
+    // After whatever choice that was searched for has been through, check if amount_found is still 0
+    if (amount_found == 0)
+    {
+        cout << "No matching items were found." << endl; // Tell user that the search didn't work.
+    }
 }
