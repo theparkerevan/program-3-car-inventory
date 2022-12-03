@@ -111,11 +111,19 @@ struct Profile
 int menu();
 
 
-/* menu()
+/* searchInventory()
+   Void Function
+   Pre-Conditions: inventory array and user.preference is passed.
+   Post-Conditions: All car information is written to report.txt*/
+void searchInventory(Car[20], string);
+
+
+/* printInventory()
    Void Function
    Pre-Conditions: inventory array is passed
    Post-Conditions: Correct car information is shown depending on user's choice.*/
-void searchInventory(Car[20], string);
+void printInventory(Car[20]);
+
 
 
 int main()
@@ -201,7 +209,7 @@ int main()
                 cout << 4 << endl;
                 break;
             case 5: // Print Inventory
-                cout << 5 << endl;
+                printInventory(inventory);
                 break;
             case 6: // Car Loan
                 cout << 6 << endl;
@@ -366,5 +374,25 @@ void searchInventory(Car inventory[20], string user_preference)
     if (amount_found == 0)
     {
         cout << "No matching items were found." << endl; // Tell user that the search didn't work.
+    }
+}
+
+
+void printInventory(Car inventory[20])
+{
+    // Initialize output text file
+    ofstream report;
+    report.open("report.txt", std::ios_base::app);
+
+    // For each value in inventory[], write to report the stats of the car in the same way as printSelf()
+    for (int i = 0; i < 20; i++)
+    {
+        report << "Name: " << inventory[i].name << endl;
+        report << "State: " << inventory[i].state << endl;
+        report << "Price: " << inventory[i].price << endl;
+        report << "Quantity: " << inventory[i].quantity << endl;
+        report << "MPG: " << inventory[i].mpg << endl;
+        report << "Rating: " << inventory[i].rating << endl;
+        report << endl;
     }
 }
