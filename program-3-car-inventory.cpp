@@ -125,6 +125,13 @@ void searchInventory(Car[20], string);
 void printInventory(Car[20]);
 
 
+/* updateInventory()
+   Void Function
+   Pre-Conditions: inventory array is passed
+   Post-Conditions: Proper aspect of Car in array is updated, should only be state or rating.*/
+void updateInventory(Car[20]);
+
+
 
 int main()
 {
@@ -206,7 +213,7 @@ int main()
                 searchInventory(inventory, user.preference);
                 break;
             case 4: // Update Inventory
-                cout << 4 << endl;
+                updateInventory(inventory);
                 break;
             case 5: // Print Inventory
                 printInventory(inventory);
@@ -272,7 +279,7 @@ void searchInventory(Car inventory[20], string user_preference)
     // If none are found, tell user no matches were found for their search term.
 
     cout << "*******************************" << endl;
-    cout << "Search by name.........press 1" << endl;
+    cout << "Search by name..........press 1" << endl;
     cout << "Search by state.........press 2" << endl;
     cout << "Search by quanity.......press 3" << endl;
     cout << "Search by preference....press 4" << endl;
@@ -382,6 +389,8 @@ void printInventory(Car inventory[20])
 {
     // Initialize output text file
     ofstream report;
+    report.open("report.txt");
+    report.close();
     report.open("report.txt", std::ios_base::app);
 
     // For each value in inventory[], write to report the stats of the car in the same way as printSelf()
@@ -394,5 +403,50 @@ void printInventory(Car inventory[20])
         report << "MPG: " << inventory[i].mpg << endl;
         report << "Rating: " << inventory[i].rating << endl;
         report << endl;
+    }
+
+    report.close();
+}
+
+
+void updateInventory(Car inventory[20])
+{
+    int choice_i;
+    string choice;
+
+    string update_str;
+    char update_char;
+
+    cout << "*******************************" << endl;
+
+    for (int i = 0; i < 20; i++) // Displays the info of each car along with its index number.
+    {
+        cout << '(' << i << ')' << endl;
+        inventory[i].printSelf();
+    }
+
+    cout << "Enter index number of the car you want to update: ";
+    cin >> choice_i;
+
+    // Then user chooses what they would like to update about their chosen car.
+    cout << "*******************************" << endl;
+    cout << "Update state............press 0" << endl;
+    cout << "Update rating...........press 1" << endl;
+
+    cin >> choice;
+
+    // User then inputs new information depending on previous choices.
+    if (choice == "0")
+    {
+        cout << "Enter new state: ";
+        cin >> update_str;
+        inventory[choice_i].state = update_str; // Then update with index already chosen
+    }
+    else if (choice == "1")
+    {
+        cout << "Enter new rating: ";
+        cin >> update_char;
+        inventory[choice_i].rating = update_char; // Then update with index already chosen
+        // Using seperate update var here, as rating is a character not a string
     }
 }
