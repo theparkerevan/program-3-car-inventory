@@ -197,5 +197,23 @@ void printInventory()
 
 void carLoan()
 {
+    User enters:
+    Loan Amount
+    Intereest Rate
+    And the Loan Duration in months
+    
+    Monthly Payment = (loan_amount * (interest_rate / 12)) / (1 - pow(1 + interest_rate / 12), -duration)
+
+    Then output:
+    Months      Amount     Payment    Interest
+    Then a for loop
+
+    interest = loan_amount * interest_rate / 12;
+    For i in range(Duration):
+        
+        loan_amount = loan_amount - monthly_payment + interest;
+
+        cout << i + 1 << setw() << loan_amount << setw() << monthly_payment << setw() << interest
+
 
 }

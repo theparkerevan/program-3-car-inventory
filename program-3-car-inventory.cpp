@@ -7,9 +7,10 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <cmath>
 
 using namespace std;
-
 
 
 struct Car
@@ -132,6 +133,13 @@ void printInventory(Car[20]);
 void updateInventory(Car[20]);
 
 
+/* carLoan()
+   Void Function
+   Pre-Conditions: None
+   Post-Conditions: The Program outputs loan repayment information month by month.*/
+void carLoan();
+
+
 
 int main()
 {
@@ -219,7 +227,7 @@ int main()
                 printInventory(inventory);
                 break;
             case 6: // Car Loan
-                cout << 6 << endl;
+                carLoan();
                 break;
             case 7: // Exit
                 program_is_running = false;
@@ -390,7 +398,7 @@ void printInventory(Car inventory[20])
     // Initialize output text file
     ofstream report;
     report.open("report.txt");
-    report.close();
+    report.close(); // Open and close report to clear it for a new print.
     report.open("report.txt", std::ios_base::app);
 
     // For each value in inventory[], write to report the stats of the car in the same way as printSelf()
@@ -448,5 +456,45 @@ void updateInventory(Car inventory[20])
         cin >> update_char;
         inventory[choice_i].rating = update_char; // Then update with index already chosen
         // Using seperate update var here, as rating is a character not a string
+    }
+}
+
+
+void carLoan()
+{
+    // User Input Variables
+    double loan_amount;
+    double interest_rate;
+    double loan_duration;
+
+    // Other Variables
+    double monthly_payment;
+    double interest;
+
+    // User Inputs
+    cout << "*******************************" << endl;
+    cout << "Enter a loan amount: $";
+    cin >> loan_amount;
+
+    cout << "Enter an interest rate (Example: 5% = .05): ";
+    cin >> interest_rate;
+
+    cout << "Enter the load duration in months: ";
+    cin >> loan_duration;
+
+    // Table header
+    cout << "Months      Amount     Payment    Interest" << endl;
+    cout << fixed << setprecision(2);
+
+    // Calculate the payment to be made each month and initial interest calculation.
+    monthly_payment = (loan_amount * (interest_rate / 12)) / (1 - pow((1 + interest_rate / 12), -loan_duration));
+    interest = loan_amount * interest_rate / 12;
+
+    for (int i = 1; i <= loan_duration; i++)
+    {
+        loan_amount = loan_amount - monthly_payment + interest;
+        interest = loan_amount * interest_rate / 12;
+
+        cout << i << setw(17) << abs(loan_amount) << setw(13) << monthly_payment << setw(11) << abs(interest) << endl;
     }
 }
