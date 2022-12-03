@@ -1,5 +1,8 @@
 int menu()
-
+void searchInventory()
+void updateInventory()
+void printInventory()
+void carLoan()
 
 
 
@@ -81,7 +84,7 @@ main
 
     while program_is_running and iterations < 10,000 or something:
         switch(menu())
-        {
+        {   
             case 0: Create Profile
                     user = Profile
             case 1: View Profile
@@ -120,4 +123,79 @@ int menu()
     But I did look it up and found a method that works by clearing the cin input and ignoring the rest.
 
     return choice
+}
+
+
+void searchInventory()
+{
+    Search Menu:
+    *******************************
+    Search by name.........press 1
+    Search by state.........press 2
+    Search by quanity.......press 3
+    Search by preference....press 4
+    Search by rating........press 5
+    Search by price.........press 6
+    Return to main menu.....press 7
+
+    User enters choice
+
+    Then have a long if statement for each of the options.
+
+    if choice == 1:
+    {
+        Enter name to search for:
+        cin >> name_choice;
+        for(int i = 0; i < 20; i++)
+        {
+            if (inventory[i].name == name_choice)
+            {
+                inventory[i].printSelf()
+            }
+        }
+    }
+    Repeat for 2-6
+    else don't do anything.
+}
+
+void updateInventory()
+{
+    string choice_i;
+    for i in inventory:
+        print:
+          (i) + inventory[i].printSelf
+
+    user selectes choice by entering their chosen i value.
+
+    Then prompt:
+    Update state......press 0
+    Update rating......press 1
+
+    user enters choice_up;
+
+    if choice_up == 0:
+        prompt user to update state
+    if choice_up == 1:
+        prompt user to update rating.
+}
+
+void printInventory()
+{
+    for i in inventory
+    {
+        Append to Output: 
+            Name: name
+            State: state
+            Price: ...
+            Quantity: 
+            MPG: 
+            Rating: 
+            newline
+    }
+    cout << "Succsesfully printed inventory report." 
+}
+
+void carLoan()
+{
+
 }
